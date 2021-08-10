@@ -1,6 +1,9 @@
 package ir.aminr.myfirstcomposeapplication
 
+import android.content.Context
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.widget.Space
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -37,60 +40,6 @@ class MainActivity : ComponentActivity() {
             baseContent()
         }
     }
-}
-
-
-@Composable
-fun exampleOfAlign() {
-    Column() {
-        Column(
-            modifier = Modifier
-                .padding(8.dp)
-                .fillMaxWidth()
-                .height(200.dp)
-                .border(
-                    border = BorderStroke(
-                        1.dp,
-                        Color.Gray
-                    )
-                ),
-            verticalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = "Item1!",
-                Modifier
-                    .align(Alignment.CenterHorizontally),
-            )
-            Text(
-                text = "Item2!",
-                Modifier
-                    .align(Alignment.CenterHorizontally),
-            )
-        }
-
-        Spacer(modifier = Modifier.padding(top = 8.dp))
-
-        Row(
-            modifier = Modifier
-                .padding(8.dp)
-                .height(200.dp)
-                .width(200.dp)
-                .border(
-                    border = BorderStroke(
-                        1.dp,
-                        Color.Gray
-                    )
-                ),
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = "Item1!",
-                Modifier
-                    .align(Alignment.CenterVertically),
-            )
-        }
-    }
-
 }
 
 @Composable
@@ -153,7 +102,7 @@ fun baseContent() {
                     text = "800 calories",
                     modifier = Modifier
                         .fillMaxHeight()
-                        .padding(start = 16.dp,end = 16.dp)
+                        .padding(start = 16.dp, end = 16.dp)
 
                 )
                 Spacer(modifier = Modifier.padding(8.dp))
@@ -170,6 +119,60 @@ fun baseContent() {
 
 
     }
+}
+
+
+@Composable
+fun exampleOfAlign() {
+    Column() {
+        Column(
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth()
+                .height(200.dp)
+                .border(
+                    border = BorderStroke(
+                        1.dp,
+                        Color.Gray
+                    )
+                ),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = "Item1!",
+                Modifier
+                    .align(Alignment.CenterHorizontally),
+            )
+            Text(
+                text = "Item2!",
+                Modifier
+                    .align(Alignment.CenterHorizontally),
+            )
+        }
+
+        Spacer(modifier = Modifier.padding(top = 8.dp))
+
+        Row(
+            modifier = Modifier
+                .padding(8.dp)
+                .height(200.dp)
+                .width(200.dp)
+                .border(
+                    border = BorderStroke(
+                        1.dp,
+                        Color.Gray
+                    )
+                ),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "Item1!",
+                Modifier
+                    .align(Alignment.CenterVertically),
+            )
+        }
+    }
+
 }
 
 

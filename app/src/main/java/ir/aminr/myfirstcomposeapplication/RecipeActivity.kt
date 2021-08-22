@@ -7,9 +7,6 @@ class RecipeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.recipe_activity)
-        supportFragmentManager.beginTransaction().replace(
-            R.id.main_container,
-            RecipeListFragment()
-        ).commit()
+
     }
 }

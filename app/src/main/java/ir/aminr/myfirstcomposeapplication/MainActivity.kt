@@ -1,35 +1,33 @@
 package ir.aminr.myfirstcomposeapplication
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.widget.Space
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toBitmap
 import ir.aminr.myfirstcomposeapplication.ui.theme.MyFirstComposeApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -37,149 +35,63 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            baseContent()
+            UserCard()
         }
     }
 }
 
 @Composable
-fun baseContent() {
-    LazyColumn(
+fun UserCard() {
+    val context = LocalContext.current
+    Row(
         modifier = Modifier
-            .fillMaxHeight()
             .fillMaxWidth()
-            .background(
-                Color(0xFFf2f2f2)
-            )
+            .wrapContentHeight()
+            .padding(16.dp)
+            .border(1.dp, Color.Gray)
+            .padding(8.dp)
     ) {
-
-
-        item {
-            Column() {
-                ContextCompat.getDrawable(
-                    LocalContext.current,
-                    R.drawable.happy_meal_small
-                )?.let {
-                    Image(
-                        bitmap = it.toBitmap().asImageBitmap(),
-                        contentDescription = null,
-                        modifier = Modifier.height(300.dp),
-                        contentScale = ContentScale.Crop
-                    )
-                }
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = "Happy Meal",
-                        fontSize = 30.sp,
-                        fontStyle = FontStyle.Italic,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Start,
-                        style = TextStyle(
-                            color = Color(0xFF3f3f3f)
-                        ),
-                        modifier = Modifier
-                            .align(Alignment.CenterVertically)
-                            .padding(start = 16.dp, end = 16.dp)
-                    )
-
-                    Text(
-                        text = "$5.99",
-                        modifier = Modifier
-                            .align(Alignment.CenterVertically)
-                            .padding(start = 16.dp, end = 16.dp),
-                        style = TextStyle(
-                            color = Color(0xFF85bb65)
-                        )
-                    )
-                }
-                Spacer(modifier = Modifier.padding(4.dp))
-                Text(
-                    text = "800 calories",
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .padding(start = 16.dp, end = 16.dp)
-
-                )
-                Spacer(modifier = Modifier.padding(8.dp))
-                Button(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                ) {
-                    Text(text = "Order Now")
-                }
-
-
-            }
-        }
-
-
-    }
-}
-
-
-@Composable
-fun exampleOfAlign() {
-    Column() {
+        Image(
+            painter = painterResource(id = R.drawable.ic_user),
+            contentDescription = "user picture",
+            modifier = Modifier
+                .size(96.dp)
+                .clip(CircleShape),
+            contentScale = ContentScale.Crop
+        )
         Column(
             modifier = Modifier
-                .padding(8.dp)
-                .fillMaxWidth()
-                .height(200.dp)
-                .border(
-                    border = BorderStroke(
-                        1.dp,
-                        Color.Gray
-                    )
-                ),
-            verticalArrangement = Arrangement.SpaceBetween
+                .padding(start = 8.dp)
+                .align(Alignment.CenterVertically),
+            verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Item1!",
-                Modifier
-                    .align(Alignment.CenterHorizontally),
+                text = "Amin",
+                fontSize = 24.sp,
+                fontFamily = FontFamily.Monospace,
+                color = colorResource(id = R.color.purple_700)
             )
-            Text(
-                text = "Item2!",
-                Modifier
-                    .align(Alignment.CenterHorizontally),
-            )
-        }
-
-        Spacer(modifier = Modifier.padding(top = 8.dp))
-
-        Row(
-            modifier = Modifier
-                .padding(8.dp)
-                .height(200.dp)
-                .width(200.dp)
-                .border(
-                    border = BorderStroke(
-                        1.dp,
-                        Color.Gray
-                    )
-                ),
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = "Item1!",
-                Modifier
-                    .align(Alignment.CenterVertically),
-            )
+            Spacer(modifier = Modifier.size(8.dp))
+            Button(onClick = {
+                Toast.makeText(
+                    context,
+                    "This is Amin info",
+                    Toast.LENGTH_LONG
+                ).show()
+            }) {
+                Text(text = "Show Info")
+            }
         }
     }
-
 }
-
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    MyFirstComposeApplicationTheme {
-        baseContent()
+    Surface(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        UserCard()
     }
+
 }
